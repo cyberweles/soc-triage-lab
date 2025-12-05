@@ -1,0 +1,24 @@
+{
+  "id": "ALERT-001",
+  "title": "Multiple failed SSH logins followed by a successful authentication",
+  "source": "SIEM",
+  "product": "Azure VM / Linux auth logs",
+  "severity": "Medium",
+  "timestamps": {
+    "first_seen": "2025-01-24T12:15:03Z",
+    "last_seen": "2025-01-24T12:29:57Z",
+    "detection_time": "2025-01-24T12:30:10Z"
+  },
+  "src_ip": "203.0.113.45",
+  "dst_host": "webserver-01.example.internal",
+  "username": "root",
+  "event_count": 120,
+  "cloud_provider": "Azure",
+  "log_snippet": [
+    "Jan 24 12:15:03 webserver-01 sshd[1024]: Failed password for root from 203.0.113.45 port 51234 ssh2",
+    "Jan 24 12:17:41 webserver-01 sshd[1056]: Failed password for root from 203.0.113.45 port 51302 ssh2",
+    "Jan 24 12:19:22 webserver-01 sshd[1077]: Failed password for root from 203.0.113.45 port 51388 ssh2",
+    "Jan 24 12:24:55 webserver-01 sshd[1099]: Accepted password for root from 203.0.113.45 port 51410 ssh2",
+    "Jan 24 12:29:57 webserver-01 sshd[1113]: Session opened for user root by (uid=0)"
+  ]
+}
