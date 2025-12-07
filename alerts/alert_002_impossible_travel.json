@@ -7,14 +7,14 @@
   "user_principal_name": "alice.werner@example.com",
   "user_display_name": "Alice Werner",
   "timestamps": {
-    "first_sign_in": "2025-02-03T08:12:10Z",
-    "second_sign_in": "2025-02-03T08:24:35Z",
-    "detection_time": "2025-02-03T08:25:05Z"
+    "first_sign_in": "2025-12-07T08:12:10Z",
+    "second_sign_in": "2025-12-07T08:24:35Z",
+    "detection_time": "2025-12-07T08:25:05Z"
   },
   "sign_in_events": [
     {
       "event_id": "aad-evt-1001",
-      "timestamp": "2025-02-03T08:12:10Z",
+      "timestamp": "2025-12-07T08:12:10Z",
       "ip_address": "198.51.100.23",
       "location": {
         "country": "Germany",
@@ -27,7 +27,7 @@
     },
     {
       "event_id": "aad-evt-1002",
-      "timestamp": "2025-02-03T08:24:35Z",
+      "timestamp": "2025-12-07T08:24:35Z",
       "ip_address": "203.0.113.88",
       "location": {
         "country": "United States",

@@ -4,7 +4,7 @@
 **Title:** Multiple failed SSH logins followed by a successful authentication  
 **Source:** SIEM (Azure VM / Linux auth logs)  
 **Analyst:** cyberweles  
-**Date of analysis:** 2025-01-24  
+**Date of analysis:** 2025-12-06  
 
 ---
 
