@@ -9,71 +9,88 @@
 ---
 
 ## 1. Short Summary
-_Describe in 2–4 sentences what is happening, in your own words._
 
-Example placeholder:  
-A single external IP performed multiple failed SSH authentication attempts against `webserver-01`. After ~120 failures, a successful login for the `root` account was recorded. This may indicate a brute-force attack resulting in unauthorized access.
+A single external IP address (`203.0.113.45`) attempted approximately 120 failed SSH authentications against the `root` account on the Azure VM `webserver-01`. After these failures, the same IP successfully authenticated as root.  
+This strongly suggests a brute-force attack that resulted in unauthorized access.
 
 ---
 
 ## 2. Key Indicators
+
 - **Username:** root  
-- **Source IP:** 203.0.113.45  
+- **Source IP:** 203.0.113.45 (external)  
 - **Destination host:** webserver-01.example.internal  
-- **Event count:** 120 failed attempts + 1 successful login  
+- **Event count:** ~120 failed attempts + 1 successful login  
 - **Time window:** 12:15:03Z → 12:29:57Z  
 - **Cloud provider:** Azure  
-- **Important log entries:**  
-  - Failed password attempts  
-  - Successful authentication  
-  - Session opened  
 
-_Add your additional notes here (GeoIP, prior events, policy expectations, etc.)._
+**Important log entries:**  
+- Multiple `Failed password for root` events  
+- Followed by `Accepted password for root`  
+- Session opened (`uid=0`)  
+
+**Additional notes:**  
+- Root SSH login should not be used under normal circumstances.  
+- Brute-force sequence followed by success indicates credential compromise.
 
 ---
 
 ## 3. Initial Assessment
-Choose one:
 
 - [ ] False Positive  
 - [ ] Benign but risky  
-- [ ] True Positive — likely malicious  
+- [x] True Positive — likely malicious  
 - [ ] Needs more information  
 
 **Reasoning:**  
-- …  
-- …  
+- High number of failed authentication attempts from a single external IP.  
+- Successful root login immediately after repeated failures (classic brute-force pattern).  
+- No legitimate user behavior matches this pattern.  
+- Root login over SSH is typically forbidden by policy.
 
 ---
 
 ## 4. Severity
+
 - [ ] Low  
 - [ ] Medium  
 - [ ] High  
-- [ ] Critical  
+- [x] Critical  
 
 **Justification:**  
-- …  
+- Compromise of the highest-privileged local account (`root`).  
+- Server is publicly accessible (Azure VM).  
+- Confirmed unauthorized access after brute force.  
+- High risk of persistence, lateral movement or data tampering.
 
 ---
 
 ## 5. Decision (L1)
+
 - [ ] Close as False Positive  
 - [ ] Close as acceptable risk  
-- [ ] Escalate to L2 / IR  
+- [x] Escalate to L2 / IR  
 - [ ] Create follow-up task  
 
 **Actions / Recommendations:**  
-- …  
+- Immediately isolate the VM from the network (Azure network isolation).  
+- Block the source IP on network security groups/firewall.  
+- Disable SSH root login / enforce key-based authentication.  
+- Reset credentials for all privileged accounts.  
+- Collect additional logs (auth logs, bash history, process list, new users, cron jobs).
 
 ---
 
 ## 6. Notes for L2
-_What should L2 know? Be concise, technical and factual._  
-- …  
-- …  
+
+Unauthorized root login observed on `webserver-01` following ~120 failed SSH attempts from `203.0.113.45`.  
+Successful authentication and session creation confirm compromise.  
+Recommend full incident response workflow: forensic log review, checking for persistence mechanisms, credential rotation, and VM isolation.
 
 ---
 
 ## 7. Personal Learning Notes (Optional)
-- …  
+
+- Brute-force → success = immediate escalation.  
+- Root login should always raise severity.  
+- Cloud-exposed VMs require strict SSH hardening.
