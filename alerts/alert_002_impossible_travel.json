@@ -1,0 +1,58 @@
+{
+  "id": "ALERT-002",
+  "title": "Impossible travel sign-in for user account",
+  "source": "SIEM",
+  "product": "Azure AD Sign-In Logs",
+  "severity": "High",
+  "user_principal_name": "alice.werner@example.com",
+  "user_display_name": "Alice Werner",
+  "timestamps": {
+    "first_sign_in": "2025-02-03T08:12:10Z",
+    "second_sign_in": "2025-02-03T08:24:35Z",
+    "detection_time": "2025-02-03T08:25:05Z"
+  },
+  "sign_in_events": [
+    {
+      "event_id": "aad-evt-1001",
+      "timestamp": "2025-02-03T08:12:10Z",
+      "ip_address": "198.51.100.23",
+      "location": {
+        "country": "Germany",
+        "city": "Frankfurt am Main"
+      },
+      "device": "WIN10-LAPTOP-01",
+      "client_app": "Outlook",
+      "result": "Success",
+      "auth_method": "Password + MFA"
+    },
+    {
+      "event_id": "aad-evt-1002",
+      "timestamp": "2025-02-03T08:24:35Z",
+      "ip_address": "203.0.113.88",
+      "location": {
+        "country": "United States",
+        "city": "New York"
+      },
+      "device": "BROWSER-EDGE",
+      "client_app": "Browser",
+      "result": "Success",
+      "auth_method": "Password only"
+    }
+  ],
+  "correlation": {
+    "time_diff_minutes": 12,
+    "estimated_distance_km": 6200,
+    "impossible_travel_flag": true
+  },
+  "risk_info": {
+    "risk_level": "high",
+    "risk_event_types": [
+      "impossibleTravel"
+    ]
+  },
+  "log_snippet": [
+    "Sign-in success: alice.werner@example.com from 198.51.100.23 (Frankfurt, DE), device WIN10-LAPTOP-01, MFA required.",
+    "Sign-in success: alice.werner@example.com from 203.0.113.88 (New York, US), device BROWSER-EDGE, MFA not required.",
+    "Risk event: Impossible travel detected for user alice.werner@example.com (12 minutes between Germany and United States)."
+  ]
+}
