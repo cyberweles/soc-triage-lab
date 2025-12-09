@@ -1,0 +1,38 @@
+{
+  "id": "ALERT-003",
+  "title": "Suspicious PowerShell Execution (Encoded Command)",
+  "source": "EDR",
+  "product": "Microsoft Defender for Endpoint",
+  "severity": "High",
+  "device": "WIN-CL-023",
+  "user": "marcel.schmidt",
+  "timestamps": {
+    "event_time": "2025-12-08T09:14:22Z",
+    "detection_time": "2025-12-08T09:14:34Z"
+  },
+  "process_info": {
+    "parent_process": "explorer.exe",
+    "process_name": "powershell.exe",
+    "command_line": "powershell.exe -NoP -NonI -W Hidden -EncodedCommand SQBtAHAAcgBvAHIAdAAgACcAaAB0AHQAcAAnADsA",
+    "is_encoded": true,
+    "decoded_command_preview": "Import 'http';"
+  },
+  "network_activity": {
+    "outbound_connection": true,
+    "dst_ip": "185.199.110.153",
+    "dst_port": 443,
+    "domain": "malicious-test-payload.example"
+  },
+  "risk_signals": [
+    "Encoded PowerShell",
+    "Outbound connection to suspicious domain",
+    "Executed by non-admin user",
+    "Stealthy flags: -NoP -NonI -W Hidden"
+  ],
+  "log_snippet": [
+    "PowerShell launched with suspicious flags (-NoP, -EncodedCommand)",
+    "Base64 payload detected",
+    "Outbound HTTPS connection to 185.199.110.153",
+    "Detection: 'SuspiciousPowerShellCommand'"
+  ]
+}

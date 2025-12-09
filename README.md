@@ -11,7 +11,6 @@ A hands-on lab focused on manual SOC Level 1 alert analysis.
 - alerts/ - synthetic alert samples (JSON)
 - reports/ - my triage decisions (Markdown)
 - notebooks/ - optional Jupyter notebook for structured analysis
-- docs/ - methodology & notes
 
 ## Why this project exists:
 - SOC work is 70% triage + decision-making, not tools.
