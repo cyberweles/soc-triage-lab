@@ -1,0 +1,43 @@
+{
+  "id": "ALERT-004",
+  "title": "Azure Privilege Escalation Detected (Role Assignment to Privileged Role)",
+  "source": "SIEM",
+  "product": "Azure AD / Entra ID",
+  "severity": "High",
+  "timestamps": {
+    "event_time": "2025-12-10T11:42:15Z",
+    "detection_time": "2025-12-10T11:43:02Z"
+  },
+  "user": {
+    "actor_upn": "lukas.meier@example.com",
+    "actor_object_id": "a12f9a93-9910-4b5d-91d4-cc002178ab21",
+    "actor_risk_level": "medium",
+    "is_admin": false
+  },
+  "escalation_details": {
+    "target_user_upn": "lukas.meier@example.com",
+    "assigned_role": "Global Administrator",
+    "assignment_type": "Permanent",
+    "method": "RoleManagement.CreateRoleAssignment",
+    "privileged_role_id": "62e90394-69f5-4237-9190-012177145e10"
+  },
+  "pim_context": {
+    "eligible_roles": [],
+    "activated_roles": [],
+    "justification_provided": false
+  },
+  "log_snippet": [
+    "Actor: lukas.meier@example.com",
+    "Action: RoleManagement.CreateRoleAssignment",
+    "Assigned role: Global Administrator (permanent)",
+    "Justification: null",
+    "Method: MS Graph API",
+    "Role assignment outside PIM approval workflow"
+  ],
+  "alerts_context": {
+    "related_risk_events": ["unfamiliarSignInProperties", "tokenAnomaly"],
+    "recent_failed_logins": 5,
+    "recent_successful_signins": 1,
+    "previous_privileged_actions": []
+  }
+}

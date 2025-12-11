@@ -89,7 +89,7 @@ Recommend full incident response workflow: forensic log review, checking for per
 
 ---
 
-## 7. Personal Learning Notes (Optional)
+## 7. Personal Learning Notes
 
 - Brute-force → success = immediate escalation.  
 - Root login should always raise severity.  
